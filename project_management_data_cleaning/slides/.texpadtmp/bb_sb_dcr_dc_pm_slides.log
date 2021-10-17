@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.8.23)  16 OCT 2021 16:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.8.23)  16 OCT 2021 22:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1398,14 +1398,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 ] [7
 
-]
-
-Package hyperref Warning: Suppressing link with empty target on input line 339.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 339.
-
-[8
+] [8
 
 ]
 \tf@nav=\write7
@@ -1433,10 +1426,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  131i,11n,132p,1147b,806s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/antt/antt-ec.enc}{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/antt/antt-sy.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/antt/anttcb.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/antt/anttcr.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/antt/anttcri.pfb>
-Output written on /Users/damonroberts/Dropbox/Teaching/workshops/project_management_data_cleaning/slides/.texpadtmp/bb_sb_dcr_dc_pm_slides.pdf (8 pages, 217098 bytes).
+Output written on /Users/damonroberts/Dropbox/Teaching/workshops/project_management_data_cleaning/slides/.texpadtmp/bb_sb_dcr_dc_pm_slides.pdf (8 pages, 217331 bytes).
 PDF statistics:
- 84 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 86 PDF objects out of 1000 (max. 8388607)
+ 62 compressed objects within 1 object stream
  17 named destinations out of 1000 (max. 500000)
  35893 words of extra memory for PDF output out of 42996 (max. 10000000)
 
