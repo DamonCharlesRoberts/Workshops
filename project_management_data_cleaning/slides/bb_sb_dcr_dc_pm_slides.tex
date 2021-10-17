@@ -322,12 +322,106 @@
 		\end{enumerate}
 	\end{frame}
 	\begin{frame}
+		\frametitle{Workflow}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Communication with coauthors}
+		\begin{itemize}
+			\item Email
+			\item Slack
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{IDE's and Text Editors}
+		\begin{itemize}
+			\item Integrated Developer's Environment (IDE) - Code and building happens here
+			\begin{itemize}
+				\item RStudio
+				\item R Console
+				\item Visual Studio Code
+			\end{itemize}
+			\item Text Editor - Code is written but sent somewhere else
+			\begin{itemize}
+				\item ESS/EMACS
+				\item Sublime Text
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{File Organization}
+		\begin{itemize}
+			\item Working Directories and R Projects/\textit{here} package
+			\item \texttt{snake\_case\_file\_names}
+			\item Splitting scripts, data, figures, memos, drafts files in subfolders
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{File Storage}
+		\begin{itemize}	
+			\item No matter what: encryption and security!
+			\item Dropbox
+			\begin{itemize}
+				\item For file storage and collaboration with coauthors
+			\end{itemize}
+			\item Github
+			\begin{itemize}
+				\item For version control
+			\end{itemize}
+			\item Computer Backups
+			\begin{itemize}
+				\item Encrypted External Hard Drives
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
 		\frametitle{Data Cleaning}
 		\begin{enumerate}
 			\item Where to clean your data
 			\item R Script Conventions
+			\item Modular versus Lazy Loading
 			\item Tidyverse vs. Base R
 		\end{enumerate}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Where to clean your data}
+		\begin{itemize}
+			\item Not in Excel!!
+			\item In whatever statistical software package you use
+			\item There needs to be code for every step you take for recoding
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{R Script conventions}
+		\begin{itemize}
+			\item \texttt{snake\_case} for variable and object names
+			\item Sections and Subsections
+			\item Commenting
+		\end{itemize}
+	\end{frame}
+	\begin{frame}[fragile]
+		\frametitle{Modular versus Lazy Loading}
+		Lazy Loading
+		\begin{verbatim}
+			libary(dplyr)
+		\end{verbatim}
+				
+		Modular loading
+		\begin{verbatim}
+			box::use(
+				dplyr = dplyr[mutate]
+				)
+		\end{verbatim}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Tidyverse verus Base R}
+		\begin{itemize}
+			\item Tidyverse Benefits
+			\begin{itemize}
+				\item Consistency
+				\item Spans across workflow
+				\item What is a pipe operator?
+			\end{itemize}
+		\end{itemize}
 	\end{frame}
 	\begin{frame}
 		\frametitle{Resources}
