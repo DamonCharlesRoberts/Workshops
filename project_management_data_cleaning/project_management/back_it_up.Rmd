@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Whoa whoa whoa... just back it up...
 I'd recommend backing up your computer approximately once a week. There are a variety of ways to do this:
+
 * Apple Airport
 
 * External Hard Drive
