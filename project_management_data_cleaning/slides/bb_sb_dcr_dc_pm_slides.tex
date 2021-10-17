@@ -1,0 +1,342 @@
+\documentclass{beamer}
+% Font
+\usepackage[condensed,math]{anttor}
+\usepackage[T1]{fontenc}
+\usefonttheme{structureitalicserif}
+% xcolor and define colors -------------------------
+\usepackage{xcolor}
+
+% https://www.viget.com/articles/color-contrast/
+\definecolor{background}{HTML}{A9A9A9}
+\definecolor{purple}{HTML}{5601A4}
+\definecolor{navy}{HTML}{0D3D56}
+\definecolor{ruby}{HTML}{9a2515}
+\definecolor{alice}{HTML}{107895}
+\definecolor{daisy}{HTML}{EBC944}
+\definecolor{coral}{HTML}{F26D21}
+\definecolor{kelly}{HTML}{829356}
+\definecolor{cranberry}{HTML}{E64173}
+\definecolor{jet}{HTML}{131516}
+\definecolor{asher}{HTML}{555F61}
+\definecolor{slate}{HTML}{314F4F}
+
+% Main theme colors
+\definecolor{accent}{HTML}{F26D21}
+\definecolor{accent2}{HTML}{9a2515}
+
+
+% Beamer Options -------------------------------------
+
+% Background
+\setbeamercolor{background canvas}{bg = white}
+
+% Change text margins
+\setbeamersize{text margin left = 15pt, text margin right = 15pt} 
+
+% \alert
+\setbeamercolor{alerted text}{fg = accent2}
+
+% Frame title
+\setbeamercolor{frametitle}{bg = white, fg = slate}
+\setbeamercolor{framesubtitle}{bg = white, fg = accent}
+\setbeamerfont{framesubtitle}{size = \small, shape = \itshape}
+
+% Block
+\setbeamercolor{block title}{fg = white, bg = accent2}
+\setbeamercolor{block body}{fg = slate, bg = slate!10!white}
+
+% Title page
+\setbeamercolor{title}{fg = slate}
+\setbeamercolor{subtitle}{fg = accent}
+
+%% Custom \maketitle and \titlepage
+\setbeamertemplate{title page}
+{
+    %\begin{centering}
+        \vspace{20mm}
+        {\Large \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\\
+        {\large \itshape \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\\ \vspace{10mm}
+        {\insertauthor}\\
+        {\color{slate}\small{\insertdate}}\\
+    %\end{centering}
+}
+
+% Table of Contents
+\setbeamercolor{section in toc}{fg = slate}
+\setbeamercolor{subsection in toc}{fg = slate}
+
+% Button 
+\setbeamercolor{button}{bg = accent}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Table and Figure captions
+\setbeamercolor{caption}{fg=slate!70!white}
+\setbeamercolor{caption name}{fg=slate}
+\setbeamerfont{caption name}{shape = \itshape}
+
+% Bullet points
+
+%% Fix left-margins
+\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+\addtolength{\leftmargini}{\labelsep}
+
+%% enumerate item color
+\setbeamercolor{enumerate item}{fg = accent}
+\setbeamerfont{enumerate item}{size = \itshape}
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+
+%% itemize
+\setbeamercolor{itemize item}{fg = accent!70!white}
+\setbeamerfont{itemize item}{size = \small, shape = \itshape}
+\setbeamertemplate{itemize item}[circle]
+
+\setbeamercolor{itemize subitem}{fg = accent!70!white}
+\setbeamerfont{itemize subitem}{size = \small, shape = \itshape}
+\setbeamertemplate{itemize subitem}[square]
+
+\setbeamertemplate{itemize subsubitem}[square]
+\setbeamercolor{itemize subsubitem}{fg = slate}
+\setbeamerfont{itemize subsubitem}{size = \small, shape = \itsshape}
+
+% References
+
+%% Bibliography Font, roughly matching aea
+\setbeamerfont{bibliography item}{size = \footnotesize}
+\setbeamerfont{bibliography entry author}{size = \footnotesize, series = \bfseries}
+\setbeamerfont{bibliography entry title}{size = \footnotesize}
+\setbeamerfont{bibliography entry location}{size = \footnotesize, shape = \itshape}
+\setbeamerfont{bibliography entry note}{size = \footnotesize}
+
+\setbeamercolor{bibliography item}{fg = slate}
+\setbeamercolor{bibliography entry author}{fg = accent!60!slate}
+\setbeamercolor{bibliography entry title}{fg = slate}
+\setbeamercolor{bibliography entry location}{fg = slate}
+\setbeamercolor{bibliography entry note}{fg = slate}
+
+%% Remove bibliography symbol in slides
+\setbeamertemplate{bibliography item}{}
+
+
+
+
+
+% Links ----------------------------------------------
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,
+  linkcolor = accent2,
+  filecolor = accent2,
+  urlcolor = accent2,
+  citecolor = accent2,
+}
+
+
+% Line spacing --------------------------------------
+\usepackage{setspace}
+\setstretch{1.3}
+
+
+% \begin{columns} -----------------------------------
+\usepackage{multicol}
+
+
+% Fonts ---------------------------------------------
+% Beamer Option to use custom fonts
+\usefonttheme{structureitalicserif}
+
+% \usepackage[utopia, smallerops, varg]{newtxmath}
+% \usepackage{utopia}
+%\usepackage[sfdefault,light]{roboto}
+
+% Small adjustments to text kerning
+\usepackage{microtype}
+
+
+
+% Remove annoying over-full box warnings -----------
+\vfuzz2pt 
+\hfuzz2pt
+
+
+% Table of Contents with Sections
+\setbeamerfont{myTOC}{series=\bfseries, size=\Large}
+\AtBeginSection[]{
+        \frame{
+            \frametitle{Roadmap}
+            \tableofcontents[current]   
+        }
+    }
+
+
+% References ----------------------------------------
+\usepackage[
+    citestyle= authoryear,
+    style = authoryear,
+    natbib = true, 
+    backend = biber
+]{biblatex}
+
+% Smaller font-size for references
+\renewcommand*{\bibfont}{\small}
+
+% Remove "In:"
+\renewbibmacro{in:}{}
+
+% Color citations for slides
+\newenvironment{citecolor}
+    {\footnotesize\begin{color}{accent2}}
+    {\end{color}}
+
+\newcommand{\citetcolor}[1]{\footnotesize\textcolor{accent2}{\citet{#1}}}
+\newcommand{\citepcolor}[1]{\footnotesize\textcolor{accent2}{\citep{#1}}}
+
+% Tables -------------------------------------------
+% Tables too big
+% \begin{adjustbox}{width = 1.2\textwidth, center}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{threeparttable, booktabs, adjustbox}
+    
+% Fix \input with tables
+% \input fails when \\ is at end of external .tex file
+
+\makeatletter
+\let\input\@@input
+\makeatother
+
+% Tables too narrow
+% \begin{tabularx}{\linewidth}{cols}
+% col-types: X - center, L - left, R -right
+% Relative scale: >{\hsize=.8\hsize}X/L/R
+\usepackage{tabularx}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+% Figures
+
+% \imageframe{img_name} -----------------------------
+% from https://github.com/mattjetwell/cousteau
+\newcommand{\imageframe}[1]{%
+    \begin{frame}[plain]
+        \begin{tikzpicture}[remember picture, overlay]
+            \node[at = (current page.center), xshift = 0cm] (cover) {%
+                \includegraphics[keepaspectratio, width=\paperwidth, height=\paperheight]{#1}
+            };
+        \end{tikzpicture}
+    \end{frame}%
+}
+
+% subfigures
+\usepackage{subfigure}
+
+
+% Highlight slide -----------------------------------
+% \begin{transitionframe} Text \end{transitionframe}
+% from paulgp's beamer tips
+\newenvironment{transitionframe}{
+    \setbeamercolor{background canvas}{bg=accent!40!black}
+    \begin{frame}\color{accent!10!white}\LARGE\centering
+}{
+    \end{frame}
+}
+
+
+% Table Highlighting --------------------------------
+% Create top-left and bottom-right markets in tabular cells with a unique matching id and these commands will outline those cells
+%\usepackage[beamer,customcolors]{hf-tikz}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{fit,shapes.misc}
+
+% To set the hypothesis highlighting boxes red.
+%\newcommand\marktopleft[1]{%
+%    \tikz[overlay,remember picture] 
+%        \node (marker-#1-a) at (0,1.5ex) {};%
+%}
+%\newcommand\markbottomright[1]{%
+%    \tikz[overlay,remember picture] 
+%        \node (marker-#1-b) at (0,0) {};%
+%    \tikz[accent!80!jet, ultra thick, overlay, remember picture, inner sep=4pt]
+%        \node[draw, rectangle, fit=(marker-#1-a.center) (marker-#1-b.center)] {};%
+%}
+
+\setbeamertemplate{frametitle continuation}[from second][(contd.)]
+\title{Data Analysis Pt I}
+\subtitle{What We Wish We Had Known}
+\date{\today}
+\author{Brett Bessen \\ Sarah Brown \\ Damon C. Roberts}
+\begin{document}
+	\begin{frame}
+		\maketitle	
+	\end{frame}
+	\begin{frame}
+		\frametitle{The Replication Crisis and why we should care about Open Science}
+			\begin{figure}
+				\includegraphics[width = 50mm]{wp.png}
+				\hfill
+				\includegraphics[width = 50mm]{vox.png}	
+				\caption{Headlines of Articles in the news. Right: Washington Post, Left: Vox}
+			\end{figure}
+	\end{frame}
+	\begin{frame}
+		\frametitle{How do we deal with this?}
+		\begin{itemize}
+			\item Open Science!
+			\begin{itemize}
+				\item Political Science and the social sciences are moving towards this
+				\item It is a concerted effort to put everything we do out in the open. We share all of our code, we pre-register experiments, we do not perform one undocumented step
+				\item Why? Because we don't like our credibility tarnished. Especially given where society is.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{The Open Scientists Mindset}
+		If you do not have code for it, then you did not do it.
+		\begin{itemize}
+			\item What this means:
+			\begin{itemize}
+				\item You should have code for everything you do. Data cleaning, making graphs, and analyses
+				\item Do not click on things
+				\item Do not save files manually. Everything should be automated by code. Graphs are not saved by clicking in RStudio, use \textit{ggsave()}. Tables are not copied and pasted nor do you manually enter numbers, you write the code in R and save the output.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{How do we do open science?}
+		\begin{enumerate}
+			\item Good \textbf{Project Management \& Workflow}
+			\item Careful and thorough \textbf{Data Cleaning}
+		\end{enumerate}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Project Management}
+		\begin{enumerate}
+			\item Workflow
+			\item Communication with coauthors
+			\item IDE's and Text Editors
+			\item File Organization
+			\item File Storage
+		\end{enumerate}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Data Cleaning}
+		\begin{enumerate}
+			\item Where to clean your data
+			\item R Script Conventions
+			\item Tidyverse vs. Base R
+		\end{enumerate}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Resources}
+		\begin{itemize}
+			\item \textbf{Project Management:} \href{}{Github}
+			\item \textbf{Data Cleaning:}
+			 \href{}{Github}
+		\end{itemize}	
+	\end{frame}
+
+\end{document}
+

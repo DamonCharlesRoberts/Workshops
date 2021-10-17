@@ -1,0 +1,21 @@
+---
+title: "Backing Up Your Computer"
+author: "Damon C. Roberts"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Whoa whoa whoa... just back it up...
+I'd recommend backing up your computer approximately once a week. There are a variety of ways to do this:
+* Apple Airport
+
+* External Hard Drive
+
+* I just realized this but apparently you can do it with Dropbox Plus which is what I use. Huh.... I think it backs up individual files, though. Not necessarily your hard drive... Which is what my point is.

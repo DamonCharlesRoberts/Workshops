@@ -1,0 +1,29 @@
+---
+title: "Project Management Workshop - Start Here"
+summary: For those interested in my takes on how to manage projects and files, you
+  should start here for an overview of the workshop
+author: 'Damon C. Roberts'
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---
+## The point of managing your projects
+
+Your goal should always be: how can this be reproduceable? If someone reads a paper you write, or it is years later and you pick back up on your project: can you download the dataset, download your code, and get every figure and every table?
+
+People should not have to change or do a single thing to reproduce everything you do in a project. Every word on a figure, every decimal point in a table should match what you put in a manuscript without doing a single thing but run your code.
+
+How do we do this? Well there are a lot of ways. Those concerned with open science spend a lot of time thinking and writing about this. In this workshop, I will provide my perspective on this. I have admittedly spent probably too much time thinking and reading about this. While this is not reading Mayhew (1974) or learning how exactly a Logit and it's link function can be referred to as a Generalized *Linear* Model, this is still an important part of the job. To be good scientists. 
+
+There are a variety of workflows and ways to be a good scientist. I hope that these materials get across the general principles underlying what is considered to be good practice for open science, however.
+
+## Organization of the workshop
+Here is the following order that you probably should read these materials in:
+
+1. Start Here (congrats, you've completed this!)
+2. RStudio vs. Text Editors
+3. Your First R Script and Naming It
+4. (Collaboration-Friendly) Local File Storage
+5. Backing Up Your Computer

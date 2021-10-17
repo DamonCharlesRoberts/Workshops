@@ -1,0 +1,81 @@
+---
+title: "Your First R Script and Naming It"
+author: "Damon C. Roberts"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Scripts
+So you've set up your coding environment just how you want it. Awesome! 
+
+It is common in the coding world for a language to have some conventions. These can sometimes be a bit stylistic and sometimes it can be relatively important. For R, here's [Hadley Wickham's style guide](http://adv-r.had.co.nz/Style.html). A note: If you don't know Hadley Wickham, but intend to work primarily in R, you'll eventually know them quite well. They are about as celebrity status as it gets for R nerds: involved in a lot of package development and involved with the Tidyverse crew. 
+
+When you approach a project, you should have one task per script. For me, I often have multiple scripts per analysis I do. I have a cleaning script where I have all my code for my dataset cleaning and then I have one for the analyses. I do this for a few reasons:
+
+1. Conventions in coding often view a script as a recipe to do one particular thing. In many other programming languages like python, people use many many scripts for an overarching project.
+
+2. For more practical purposes, if you decide your analytic approach is bunk, then you may want to archive that script. You never want to delete code because you want to document everything that you've tried. This is good for reproducibility. So if you want to archive some code, but you have *everything* in the same script, well, then you've got this annoying problem where you have to find all of the code you wrote to clean things. And if you don't think about using a script per task, it is likely you wrote some cleaning code, then ran some analyses, then cleaned some more, then wrote more models, etc. If you break up your tasks into separate tasks, this forces you to write your code to be sequential and not iterative. This also has some other benefits if you extend the logic.
+
+
+## Starting from a Tabula Rasa
+
+Here is an example of what an R script looks like for me:
+
+```{r eval=FALSE}
+#Title: Damon's Project ----
+
+#Notes: ----
+  #* Description: Script to demonstrate what a file (with it's documentation may look like) ----
+  #* Updated: 2021/10/08 ----
+  #* Updated by: dcr ----
+  #* Session Info:
+writelines(capture.output(sessionInfo()), "readme.txt")
+
+# Setup: ----
+  #* Load Packages ----
+box::use(
+  haven = haven[read_dta],
+  dplyr = dplyr[select],
+  skimr = skimr[skim],
+  magrittr = magrittr[...]
+)
+  #* Source Cleaning Script ----
+source("code/anes_2020_cleaning.R")
+
+  #* Load Datasets ----
+anes_2020 = read_dta("data/anes_2020_cleaned.dta")
+
+# Descriptive statistics ----
+anes_2020 %>% 
+  select(dv, iv1, iv2, iv3, ivn) %>% # Select relevant variables
+  skimr() # Get descriptive stats of selected variables
+
+```
+
+### Here are some points I want to make about the script:
+
+* The commenting has a hierarchical structure to it. 
+  + `#` is the highest level bullet point or section. `#*` is a subsection. `#**` is a subsubsection, and you can keep going on. You follow each section/subsection title with four dashes. In R studio, you will notice this has the added benefit of giving you a menu that locates you within the script. This little menu will be at the bottom of your script panel. Usually it is a little green hashtag button that says "Untitled". Once you name a section though, it changes it. You can click on it to and see all the sections. So if you get lost in your code, it is a quick and easy way to jump back and forth. 
+
+* You can get a sense of my file naming conventions and organization:
+  * My working directories look like: `/Users/damonroberts/Dropbox/current_projects/project_name/`
+  * Within my working directory, I have folders titled: "draft", "data", "code", "figures", "memos", "feedback". All using lower camel case.
+  
+* You include a descriptive title for the script.
+* Include a Notes section for your script. In the Notes section, you should _at least_ have:
+  + A Description subsection which describes what you are doing what you are doing in the script. Ideally each script has one task and that you aren't listing out both your cleaning and your analyses tasks in one script.
+  + When the file was last updated
+  + Who was the person to last update it. This is really important when you have coauthors so that you know what was changed and by whom. So if there are issues, you know who to blame.
+  + Another thing I do is I write a .txt file called "readme". You should include `README` files for all of your projects .They are used to help provide notes and to explain the organization of the supplemental materials you might send off to a journal once you've got that sweet sweet manuscript acceptance. I initialize a readme file the first time I run my code for a project that provides information about my computer. It includes a lot of details such as what operating system I am on, what version of R and the packages I am using are, and what packages I have already loaded. This provides information so that if someone is trying to replicate your code but is getting thrown errors, they can look at that information in the readme file and see what versions of things you were running as a way to start diagnosing the errors.
+* Create a Setup section. This is really helpful way to describe the loading packages and data section. In this setup section you should have things like:
+  + A Loading Libraries section which is where you load in all the packages that you will use. A note about my code above: I "modularly load" my functions. Meaning instead of "Lazy Loading" by writing `library(haven)`, what I am doing is saying I only want to load the underlying code for the `read_dta()` function from the `haven` package. Why do I do this? Well, it (1) keeps my environment clean so that I don't have conflicting functions (this is really common with MASS and dplyr where they have functions with the same name and then R freaks out on you), and it keeps my environment minimal which helps with performance gains; but (2) most importantly, it makes it explicit what packages I am using to do things. If I see someone write `library(haven)` and then load ten other packages and then write `read_dta()` it may not be so clear where they got that package from. Doing it this way makes it _really_ clear for someone else to look at my code and know exactly what functions are coming from where. This is not a weird idea. R is the weird ones in just doing what is called "Lazy Loading". Programming languages like Python use modular library loading. So maybe do what the cool kids do?
+  + I then include a section where I include all of my data. A note about syntax you might see in different spots in my code. I use the `=` operator to define object names rather than the conventional `<-`. I am weird. There is no really good reason for why I do it. 
+  + You can also include other things that may be important to establish at the start like if the example code from above is in a script to do some analyses, I may want to run my data cleaning scripts first. One cool thing you can do is what is called "sourcing". To `source` an R script is to run it. So you'd just run that line and all your code in that other script will run in one fowl swoop. It is pretty nice. 
+* I talk about it more in the data cleaning section, but you should always do some descriptive analyses of your data. You should know what your data look like before you run a single regression. If you don't you may be missing some really important things that might cause some issues for your models (that you may not necessarily see readily). One way I like to do this is by using the `skimr` package which provides an output for your data that includes the standard stuff like the mean and min and max. The really nice thing is that the `skim` function also returns a small histogram of your variable as well. Sometimes it can be hard to get much out of it, but it still at least gives you a sense of what things look like. I often try to do a few more things before moving on such as making some density plots for each variable, make some tables I can throw in an appendix of my descriptive stats, etc. 

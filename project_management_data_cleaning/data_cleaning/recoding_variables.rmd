@@ -1,0 +1,115 @@
+---
+title: "Recoding Variables: `ifelse()` and `dplyr::case_when()`"
+author: "Damon C. Roberts"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## What is `ifelse()`?
+It is an extension of the for loop. It is one nifty option that you can use when recoding variables. It is mostly useful for situations where you want to say: "If something meets these sets of conditions, code a variable this way. For everything else, do this to it."
+
+It says: *IF* this condition is met, do this; *ELSE* do this. 
+
+Let's see how it works.
+
+Say I have a variable in my dataset that I want to code as either 0 or 1. Perhaps it is continuous (but can be categorical) and it would just be easier to specify a condition where if it is met, then assign this new variable a value of 1 and if it doesn't than assign it something a value of 0.
+```{r, eval = FALSE}
+# Set Up ----
+  #* Load Packages ----
+  box::use(
+    magrittr = magrittr[...], # For Pipe Operator
+    dplyr = dplyr[mutate, case_when] # From dplyr package load in dplyr::mutate() and dplyr::case_when() functions
+    )
+  #* Load Data set ----
+data_set <- read.csv('data/data_set.csv')
+# Cleaning ----
+
+  data_set <- data_set %>%
+    mutate(
+  #* cont_var ----
+    #** Coded as: 0 - 100  ----
+    #** Recode to: 0 - Not Above 70, 1 - Above 70 ----
+    dummy_var = ifelse(cont_var > 70, 1, 0), # If greater than 70, assign it a value of 1, otherwise assign it a value of 0
+  #* cat_var ----
+    #** Coded as: 1 - Strongly Disagree, 2 - Disagree, 3 - Neither, 4 - Agree, 5 - Strongly Agree ----
+    #** Recoded to: 0 - Do not strongly agree, 1 - Strongly agree ----
+    cat_var = ifelse(cat_var == 5, 1, 0) # If equal to 5, assign it a value of 1, otherwise assign it a value of 0
+    )
+```
+It can also be useful for dealing with missing values too! It is relatively common in surveys (like the ANES) to have missing values assigned the value of -98 or something similar. One cool application of `ifelse()` is to use it to deal with missing values. For example:
+
+```{r, eval = FALSE}
+# Set Up ----
+  #* Load Packages ----
+  box::use(
+    magrittr = magrittr[...], # For Pipe Operator
+    dplyr = dplyr[mutate, case_when] # From dplyr package load in dplyr::mutate() and dplyr::case_when() functions
+    )
+  #* Load Data set ----
+data_set <- read.csv('data/data_set.csv')
+# Cleaning ----
+
+  data_set <- data_set %>%
+    mutate(
+      #* party_id ----
+        #** Coded as: 1 - Democrat, 2 - Moderate, 3 - Republican, -98 Didn't Respond/Don't Know ----
+        #** Recode to: 1 - Democrat, 2 - Moderate, 3 - Republican ----
+      party_id = ifelse(party_id == -98, NA, party_id) # If equal to -98, assign it a value of NA, leave values as is in party_id
+```
+
+### Nested `ifelse()`
+Sometimes, the conditions are a bit more complicated. Say I want to take that continuous variable and make it a categorical variable - and for everything below a value of 20, just make it equivalent to NA because you might think those responses are just fake for whatever reason. You can do what is called nesting `ifelse()`. Here's an example of how you can use these:
+```{r, eval = FALSE}
+# Set Up ----
+  #* Load Packages ----
+  box::use(
+    magrittr = magrittr[...], # For Pipe Operator
+    dplyr = dplyr[mutate, case_when] # From dplyr package load in dplyr::mutate() and dplyr::case_when() functions
+    )
+  #* Load Data set ----
+data_set <- read.csv('data/data_set.csv')
+# Cleaning ----
+
+  data_set <- data_set %>%
+    mutate(
+  #* cont_var ----
+    #** Coded as: 0 - 100  ----
+    #** Recode to: NA - Below 20, 1 - Between 21 and 50, 2 - Between 51 and 70, 3 - Between 71 and 100 ----
+    cat_var = ifelse(cont_var >= 21 & cont_var <= 50, 1, # If between 21 and 50, assign it value of 1, if not then move along
+                  ifelse(cont_var >= 51 & cont_var <= 70, 2, # If between 51 and 70, assign it a value of 2, if not then move along
+                    ifelse(cont_var >= 71 & cont_var <= 100, 3, NA))),  #If between 71 and 100, assign it a value of 3, if no conditions met then assign it as a missing value
+
+```
+## What is `case_when()`?
+
+It is an alternative to `ifelse()`. As you can tell, `ifelse()` can get really messy. It can get somewhat easy to get lost in the logic and it can sometimes behave in somewhat unpredictible ways. You can use the `case_when()` function from the `dplyr` package. With this, you can explicitly specify the different conditions for a variable to take on a particular value. Doing the following steps from the nexted `ifelse()` example, this is how you'd do it with `dplyr::case_when()` instead.
+
+```{r, eval = FALSE}
+# Set Up ----
+  #* Load Packages ----
+  box::use(
+    magrittr = magrittr[...], # For Pipe Operator
+    dplyr = dplyr[mutate, case_when] # From dplyr package load in dplyr::mutate() and dplyr::case_when() functions
+    )
+  #* Load Data set ----
+data_set <- read.csv('data/data_set.csv')
+# Cleaning ----
+
+  data_set <- data_set %>%
+    mutate(
+  #* cont_var ----
+    #** Coded as: 0 - 100  ----
+    #** Recode to: NA - Below 20, 1 - Between 21 and 50, 2 - Between 51 and 70, 3 - Between 71 and 100 ----
+    cat_var = case_when(cont_var >= 21 & cont_var <= 50 ~ 1,
+                        cont_var >= 51 & cont_var <= 70 ~ 2,
+                        cont_var >= 71 & cont_var <= 100 ~ 3,
+                        cont_var <= 20 ~ NA)
+```
+As you can see, this is really explicit and obvious. If your coauthor wrote the nested `ifelse()` above compared to the `dplyr::case_when()`, which do you think you'd understand first? Why people might use `ifelse()` is because it is quite speedy. Sometimes people also like writing code that follows logic and think about computation that way as opposed to very stepwise. Either way, it will come to the same outcome (so long as the code is right). 

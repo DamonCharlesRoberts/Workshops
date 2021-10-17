@@ -1,0 +1,84 @@
+---
+title: "(Collaboration-Friendly) Local File Storage"
+author: "Damon C. Roberts"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Why you should use cloud based storage... or at least a flash drive/external hard drive
+Picture this: it is a friday morning and you have been fevorishly working on a project for the past week and are excited to have a draft or some results to send to a coauthor or your advisor. Boom... your computer... dead. The only files you have anywhere besides your computer's Kentucky Fried Hard Drive is through whatever you happened to your coauthor last friday. Well, now you've just wasted a week's worth of work because that stuff is g.o.n.e. That doesn't include notes from seminars, readings with annotations, other projects, etc. Don't be this person.
+
+You should store your files somewhere besides a single physical space on your computer like on it's hard drive. You should store your files in multiple places. Invest in a good flash drive or external hard drive. Save all your non-application/replaceable files on it. If you go down this route, you need to password protect and encrypt the flashdrive or hard drive. Why? Well, if you collect your own data, IRB requires you protect that data. You are legally liable if someone's data gets leaked because you left your flash drive in the UMC. You aren't Facebook, so you don't have a lot of lawyers to help get you out of that pickle. It is our job to think about these things. Even if you don't have data from an IRB, often times there are still certain security precautions that you have to take (to varying degrees) that you should keep track of when you download a dataset. For many of us, we have seen the advent of cloud storage like Dropbox, Google Drive, and OneDrive. 
+
+Cloud based storage I think is the way to go. Even if you use a flash drive or external hard drive, you still run into the danger of losing that too. A cloud drive sends encrypted versions of your files to a server from whatever company owns the service you use. The other nice thing is that they often allow you to share certain folders or files with people. This is excellent for collaboration when you are working with coauthors. This makes life much easier for you and a coauthor if you can access everything they've done and everything you've done in one spot instead of counting on them to send you an email to give you a new version of a file where they may have only changed one word. 
+
+I don't think I need to do too much to convince you that using cloud-based file storage is a good thing. 
+
+## Why cloud-based storage is not enough
+Okay, I just told you about how great cloud-based storage is. Now I am going to tell you that it is not enough. This cloud based storage _does not_ provide version control for any code you write. What is version control? Have you ever written over something in a file, save it, and then wish you had noticed and had done ctl+z after? Well, version control is supposed to help with that issue.
+
+If you use cloud-based storage, some more advanced plans like Dropbox have a version-control-lite functionality. This still can be somewhat unreliable and that information is deleted after so long. In addition to using your cloud-based file storage, you should also use Github. Yeah, yeah. That is a hardcore nerd zone and for some you may start getting anxiety when you read this. Don't stress. It has gotten much more beginner friendly over time. For those that don't know what it is? Well it is a kind of social media site for coders to put up projects on their profiles. Often it is used by tech companies as an easy way for people to collaborate on code and to have a long-running record of all of their code. 
+
+Why should you use github? Well it is primarily built for version control. That is its main purpose. It also is nice because it is a very well known place for coders. If you ever are considering a data science job in industry and you don't have a github, then they will probably already question your coding capabilities. It is a great place to build a portfolio by documenting your code. For working papers, though, I'd recommend that you don't publicly post the code but keep it private until its accepted by a journal or something. 
+
+## How do I get started with Github?
+1. Create an online account: https://github.com
+2. To start adding your files to Github, you should be familiar with some terminology:
+ + Repo or Repository: The working directory or the folder that all of your code for that particular project is in. So for example if you have a project on civil war and the folder with all of that work is called "civil_war", then your repo will be "civil_war"
+ + Stage: There are a few steps when publishing your code to github. The first is called staging. In this, you are specifying what files you want to add to github. You likely don't want to publish every file to your github repo. For example, if your advisor sent you a marked up draft of your manuscript, you probably don't want to add that. If you have experimental data, you don't want to publish that until you anonymize it according to IRB protocols. Still even then you probably don't want to share it until a journal asks for it. 
+ + Commit: In this stage, you commit those files to be updated in your repo. You want to specify a message and a description. These should help you track down what particular files and changes you were making for this repo update.
+ + Push: In this stage, you are "publishing" the updated files to your repo. You are sending it out to github. 
+ + Pull: If you work on multiple machines or a coauthor uses github, you want to sendin a pull request telling github to update your files based on what the most updated version of your repo.
+3. How do I do this? (Github Desktop App Version):
+  + Download the Github Desktop Application on your computer. If this is a folder already on your computer, you can simply `add` the folder. This is pretty self explanatory and you can click through.
+  + There are some other tricks to doing it this way, but [here's some documentation](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/getting-started-with-github-desktop)
+4. How Do I do this? (Command Line Version - Windows): 
+  + Most coders rely on Linux-based systems. So as a Windows user, things are going to be a bit trickier. Command line for Github is written using `Bash`. In Windows, if you open Command Prompt or Powershell, you are writing with `Powershell`. This means that you will either need to do some things with your computer by [using developer mode](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/) but this has always seemed sketchy to me. The other option is to [install GitBash](https://gitforwindows.org/). Once you do this, everything else will be the same as it is for Mac or Ubuntu users, you will just write your commands using this GitBash application. 
+5. How do I do this? (Command Line Version - Mac, Linux, and Windows users once installed Gitbash):
+  + Set your working directory:
+```{bash, eval = FALSE}
+cd /Users/damonroberts/Dropbox/current_projects/civil_war/
+```
+  + Initiate your git repository
+```{bash, eval = FALSE}
+git init
+```
+  + Add the all of the relevant files
+```{bash, eval = FALSE}
+git add -a
+```
+  + [Create a .gitignore file](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files) before you do anything and then write
+```{bash, eval = FALSE}
+touch .gitignore
+git rm --cached FILENAME
+git add .gitignore
+```
+  + Commit it
+```{bash, eval = FALSE}
+git commit
+```
+  + Then connect this to Github by logging onto github on a web browswer and Create a new repository button
+  + Push to the repository
+```{bash, eval = FALSE}
+git remote add origin git@github.com:username/new_repo
+git push -u origin main
+```
+* Things to look out for:
+  + Your github repo and your files are not disconnected. If you change something on github like deleting a repo, you will delete those files from your computer. So be purposeful about what you are doing or you can run into issues.
+* What I do for file storage:
+  + Dropbox
+  + Github
+  + And as I will talk about in the next document, I use a external hard drive as well. I have 3 places I keep all my files. 
+* Here are some more resources on how to get acquainted with Github:
+  + https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/creating-your-first-repository-using-github-desktop
+  + https://docs.github.com/en/get-started/quickstart/git-and-github-learning-resources
+  + https://towardsdatascience.com/getting-started-with-git-and-github-6fcd0f2d4ac6
+  + https://opensource.com/article/18/1/step-step-guide-git
+  + https://kbroman.org/github_tutorial/pages/init.html

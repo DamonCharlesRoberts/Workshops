@@ -1,0 +1,5 @@
+[0] Config.pm:311> INFO - This is Biber 2.16
+[0] Config.pm:314> INFO - Logfile is '/Users/damonroberts/Dropbox/Teaching/workshops/project_management_data_cleaning/slides/.texpadtmp/bb_sb_dcr_dc_pm_slides.blg'
+[103] biber-darwin:340> INFO - === Sat Oct 16, 2021, 16:13:30
+[125] Biber.pm:415> INFO - Reading '/Users/damonroberts/Dropbox/Teaching/workshops/project_management_data_cleaning/slides/.texpadtmp/bb_sb_dcr_dc_pm_slides.bcf'
+[225] Utils.pm:395> WARN - No data sources defined!

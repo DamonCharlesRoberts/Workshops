@@ -1,0 +1,60 @@
+---
+title: "Why Use Tidyverse"
+author: "Damon C. Roberts"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. **It provides a set of consistent functions**: While `tidyverse` is well known for updating its packages a lot, the functions generally remain the same. They often change in favor of making them better. They rarely change underlying math or approaches that may cause issues for models.
+
+2. **There are packages and functions across your workflow**: You can use `tidyverse` for importing data, data cleaning, exploratory data analysis (EDA), analysis, and depiction of your analyses. This is where its strength as a source for reproducability in R sits.
+
+## How do I know when I am looking at Tidyverse or Base R? 
+
+### Example of Base R
+
+```{r, eval = FALSE}
+# Set Up ----
+  #* Load Data set ----
+data_set <- read.csv('data/data_set.csv')
+# Cleaning ----
+  #* V1 
+    #** Coded as: 1 - Something, 2 - Something else ----
+    #** Recode to: 0 - Something, 1 - Something else ----
+data_set$v1[dat_set$v1 == 1] <- 0
+data_set$v1[dat_set$v1 == 2] <- 1
+```
+* You use the `$` operator to specify `dataset$variable`.
+* You recode a variable in this case and specify the conditions by using brakets. 
+### Example of `Tidyverse`
+
+```{r, eval = FALSE}
+# Set Up ----
+  #* Load Packages ----
+  box::use(
+    magrittr = magrittr[...], # For Pipe Operator
+    dplyr = dplyr[mutate, case_when] # From dplyr package load in dplyr::mutate() and dplyr::case_when() functions
+    )
+  #* Load Data set ----
+data_set <- read.csv('data/data_set.csv')
+# Cleaning ----
+  #* V1 
+    #** Coded as: 1 - Something, 2 - Something else ----
+    #** Recode to: 0 - Something, 1 - Something else ----
+    data_set <- data_set %>%
+      mutate(v1 = case_when(v1 == 1 ~ 0,
+                            v1 == 2 ~ 1))
+```
+* You use the pipe operator, `%>%`, pulled from the `magrittr` package. What this does is allows me to connect different steps of code together. For example, here I am saying to make my data_set dataframe object equivalent to my data_set dataframe object after I have preformed the following steps. You can use the operator multiple times. It is kind of like saying "do this... and then... and then... and then...",
+* You use functions pulled from packages part of the tidyverse.
+
+A quick note: while you can use `library(tidyverse)` to load in these same functions, this is kind of a conglomerate package that contains many packages that are within tidyverse. It is best to not rely on loading in all packages within `tidyverse` and instead load in the particular package that contains the function you are trying to use. This is beneficial in that there is no real way to get around memorizing some common functions and the packages that contain them.
+
+Another thing you will notice about my code and relates to my last point. You don't see me loading packages by using the `library()` function. I instead use a package called `box` and its function `use`. So you see my code `box::use()`. What I am doing here is what is called modularly loading code. This is a common practice in coding languages like python. What you are doing is only loading in specific functions from a package rather than "lazy loading" in the entire suite of functions in a package. Why do I do this? (1) it cuts down on the amount of memory I am using on my computer, (2) sometimes functions will be named the same thing by different packages and will perform different functions (a common one is a conflict between funcitons in the `MASS` and `dplyr` packages), (3) this helps with the reproducibility and readability of your code. To elaborate on this third point. Imagine I just wrote `library(dplyr)` and then loaded 5 other packages, would you know where `case_when()` was coming from? Not without some digging. Instead with my modular approach to loading in functions and not entire packages, you can see that I am pulling `mutate()` and `case_when()` from the `dplyr` package. Pretty nice huh? This is a relatively new thing, but if I've convinced you of its value, you can go to the [Github](https://github.com/klmr/box) for the `box` package to install, play around with it, and learn more about how it works 

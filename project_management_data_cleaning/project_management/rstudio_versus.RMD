@@ -1,0 +1,44 @@
+---
+title: "RStudio versus..."
+author: "Damon C. Roberts"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## RStudio
+
+RStudio is great!! It has a lot of features that are helpful when you are writing code.
+
+### The good of RStudio:
+* It is low maintenance
+* It puts the Integrated in IDE
+* You can build RMD documents, can use RProjects (will discuss these in more detail later), and can manage Shiny Apps (if you want to build web dashboard of your analyses)
+
+## Other IDE's and Text Editors
+
+There are a lot of alternatives to using RStudio. Day-by-day, R is being implemented in many other development environments. Here is a list of some of the ones I am aware you can use R in:
+
+* [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Ikuyadeu.r)
+
+* [Sublime Text](https://bishwarup-paul.medium.com/a-guide-to-using-r-in-sublime-text-27f78b33f872)
+
+* ESS
+
+### The cons of these Text Editors:
+
+* They are super high maintenance and there is significant set up costs
+
+* If you aren't super sure in what you are doing, it is really easy to mess up. For example, it can be really tricky to get dataframe previews relative to RStudio in many of these. This means, that if you like looking at your dataframe after running some code, these text editors will likely force you to break out of this habit to check your code (this isn't totally a bad thing though once you gain more experience with R and can check things in other ways).
+
+### Why the heck would someone use these then?
+
+* They are super efficient and light. By this I mean that they put less pressure on your machine when you use these. They do not have a bunch of options that you can click through and play with. They are very minimalist. This saves some of your GPU for the code. This is really helpful for those that get into complicated models and those who use large datasets. 
+
+* They are very minimal and require you to be more in control of the process. While life is easier to click through to do research, this lets go of a lot of control in your process and reduces the ease in which someone can reproduce your work. While RStudio is an improvement over something like SPSS, it still offers quite a lot of user-friendliness; which can be not so great for reproduceability. For me, I see the battle over reproduceability as a tradeoff between ease for the researcher and ease for the replicator. What I think is in spirit with efforts in open science is that you should go with the latter. 
